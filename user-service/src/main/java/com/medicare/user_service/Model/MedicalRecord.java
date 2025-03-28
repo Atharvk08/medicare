@@ -33,15 +33,15 @@ public class MedicalRecord {
     @Column(nullable = false)
     private LocalDateTime recordDate;
 
-    @Column(nullable = false)
+    @Column
     private String consultationType;
 
     @ElementCollection
     @CollectionTable(name = "record_symptoms", joinColumns = @JoinColumn(name = "medical_record_id"))
-    @Column(name = "symptom")
+    @Column(name = "symptoms")
     private List<String> symptoms;
 
-    @Column(nullable = false)
+    @Column
     private String diagnosis;
 
     @Column
@@ -50,8 +50,8 @@ public class MedicalRecord {
     @Column(columnDefinition = "TEXT")
     private String consultationNotes;
 
-    //String to class in future
-    private String prescriptions;
+    //String to class Prescription in future
+    private List<String> prescriptions;
 
     //String to class in future
     private List<String> tests;
@@ -59,4 +59,30 @@ public class MedicalRecord {
     //payment integration -> Payment class
     private String paymentId;
 
+
+/* for future
+    @Column
+    private String insuranceClaimStatus;
+
+    @Column
+    private String insuranceReferenceId;
+
+    @Column(columnDefinition = "TEXT")
+    private String emergencyAction;
+
+    @Column
+    private Boolean hospitalAdmissionStatus;
+
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
+
+    @Column
+    private String lastUpdatedBy;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime updatedAt;
+    */
 }
