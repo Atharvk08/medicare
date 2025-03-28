@@ -26,8 +26,11 @@ public class UserService {
         return repository.findAll();
     }
 
-    public Optional<User> getUserById(Long id) {
-        return repository.findById(id);
+    public User getUserById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> {
+                    return new RuntimeException("User not found");
+                });
     }
 
     public void createUser(User user) {

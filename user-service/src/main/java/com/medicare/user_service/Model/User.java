@@ -5,15 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
+@Entity
 @NoArgsConstructor
 @Data
-@Entity
 @Table(name = "users")
 @AllArgsConstructor
 @Builder
@@ -47,6 +48,12 @@ public class User {
     @Column(name="role")
     private Set<String> roles;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "medical_data_id", referencedColumnName = "id")
+    private MedicalData medicalData;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecord> medicalRecords;
 
     private String firstName;
     private String lastName;

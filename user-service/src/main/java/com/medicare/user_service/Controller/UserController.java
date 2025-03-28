@@ -3,6 +3,7 @@ package com.medicare.user_service.Controller;
 import java.util.*;
 import com.medicare.user_service.Model.User;
 import com.medicare.user_service.Service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +21,11 @@ public class UserController {
         return service.getAllUsers();
     }
 
+
+
     @GetMapping("/user/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
-        return service.getUserById(id);
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getUserById(id));
     }
 
     @PostMapping("/user/")
